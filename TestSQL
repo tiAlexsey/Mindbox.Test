@@ -1,0 +1,24 @@
+create table Products(
+    Id int identity(1,1) primary key,
+    [Name] varchar(100)
+)
+
+create table Categories(
+    Id int identity(1,1) primary key,
+    [Name] varchar(100)
+)
+
+create table LinkProductCategory(
+    Id int identity(1,1) primary key,
+    ProductId int,
+    CategoryId int,
+    foreign key (ProductId) references Products (Id),
+    foreign key (CategoryId) references Categories (Id)
+)
+
+select
+    p.Name ProductName,
+    c.Name CategoryName,
+from Products p
+left join LinkProductCategory lpc on p.Id=lpc.ProductId
+left join Categories c on lpc.CategoryId=c.id
